@@ -1,1 +1,2 @@
 - [axios](/axios/docs/README.md)
+- [vuex](/vuex/docs/README.md)

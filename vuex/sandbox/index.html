@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .flex {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <div id="todo">
+    <label>
+      base：<input type="text" v-model="base">
+    </label>
+    <label>
+      item：<input type="text" v-model="inputValue" placeholder="请输入数字..." @keyup.enter="add">
+    </label>
+    <button @click="add">添加</button>
+    <div class="flex">
+      <origin-list></origin-list>
+      <filter-list></filter-list>
+    </div>
+  </div>
+  <script src="/public/js/vue2.js"></script>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>
