@@ -1,0 +1,279 @@
+@import './common/var.scss';
+
+@mixin button-color($color) {
+  color: #FFF;
+  background-color: $color;
+  border-color: $color;
+
+  &:hover,
+  &:focus {
+    color: #FFF;
+    background-color: mix(#FFF, $color, 20%);
+    border-color: mix(#FFF, $color, 20%);
+  }
+
+  &.is-disabled {
+    &,
+    &:hover,
+    &:focus {
+      color: #FFF;
+      background-color: mix($color, #FFF);
+      border-color: mix($color, #FFF);
+    }
+  }
+
+  &.is-plain {
+    @include plain-color($color);
+  }
+}
+
+@mixin plain-color($color) {
+  color: $color;
+  background-color: mix(#FFF, $color, 90%);
+  border-color: mix(#FFF, $color, 60%);
+
+  &:hover,
+  &:focus {
+    color: #FFF;
+    background-color: $color;
+    border-color: $color;
+  }
+
+  &.is-disabled {
+    &,
+    &:hover,
+    &:focus {
+      color: mix(#FFF, $color, 40%);
+      background-color: mix(#FFF, $color, 90%);
+      border-color: mix(#FFF, $color, 80%);
+    }
+  }
+}
+
+// 上下padding，左右padding
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  border-radius: $border-radius;
+}
+
+// 默认按钮样式
+.el-button {
+  display: inline-block;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid #DCDFE6;
+  transition: .1s;
+
+  // 两个按钮之间的间隔
+  & + & {
+    margin-left: 10px;
+  }
+
+  // icon和内容之间的距离
+  [class*="el-icon-"] {
+    & + span {
+      margin-left: 5px;
+    }
+  }
+}
+
+// 不同颜色的按钮
+.el-button {
+
+  // 默认颜色
+  color: #606266;
+  background-color: #FFF;
+  border-color: #DCDFE6;
+
+  // 默认hover、focus颜色
+  &:hover,
+  &:focus {
+    color: #409EFF;
+    background-color: mix(#FFF, #409EFF, 90%);
+    border-color: mix(#FFF, #409EFF, 70%);
+  }
+
+  // 默认禁用颜色
+  &.is-disabled {
+    color: #C0C4CC;
+    background-color: #FFF;
+    border-color: #EBEEF5;
+    cursor: not-allowed;
+  }
+
+  // 默认朴素hover、focus颜色
+  &.is-plain {
+    &:hover,
+    &:focus {
+      color: #409EFF;
+      background-color: #FFF;
+      border-color: #409EFF;
+    }
+  }
+
+  // 默认朴素禁用颜色
+  &.is-plain.is-disabled {
+    &:hover,
+    &:focus {
+      color: #C0C4CC;
+      background-color: #FFF;
+      border-color: #EBEEF5;
+    }
+  }
+
+  &--primary {
+    @include button-color($--color-primary);
+  }
+
+  &--success {
+    @include button-color($--color-success);
+  }
+
+  &--warning {
+    @include button-color($--color-warning);
+  }
+
+  &--danger {
+    @include button-color($--color-danger);
+  }
+
+  &--info {
+    @include button-color($--color-info);
+  }
+
+  &.el-button--text {
+    color: #409EFF;
+    background-color: transparent;
+    border-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+
+    &:hover,
+    &:focus {
+      color: mix(#FFF, #409EFF, 20%);
+    }
+
+    &.is-disabled {
+      &,
+      &:hover,
+      &:focus {
+        color: #C0C4CC;
+      }
+    }
+  }
+}
+
+.el-button.is-loading {
+  position: relative;
+  pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    z-index: 1;
+    border-radius: inherit;
+    background-color: rgba(255, 255, 255, .35);
+    pointer-events: none;
+  }
+}
+
+// 不同尺寸的按钮
+.el-button {
+
+  // 默认尺寸
+  @include button-size(12px, 20px, 14px, 4px);
+
+  // 默认圆角尺寸
+  &.is-round {
+    border-radius: 20px;
+  }
+
+  // 默认圆形尺寸
+  &.is-circle {
+    border-radius: 50%;
+    padding: 12px;
+  }
+
+  &--medium {
+    @include button-size(10px, 20px, 14px, 4px);
+
+    &.is-circle {
+      padding: 10px;
+    }
+  }
+
+  &--small {
+    @include button-size(9px, 15px, 12px, 3px);
+
+    &.is-circle {
+      padding: 9px;
+    }
+  }
+
+  &--mini {
+    @include button-size(7px, 15px, 12px, 3px);
+
+    &.is-circle {
+      padding: 7px;
+    }
+  }
+}
+
+.el-button-group {
+  display: inline-block;
+  font-size: 0;
+
+  .el-button {
+    & + .el-button {
+      margin-left: 0;
+    }
+
+    &:not(:last-child) {
+      margin-right: -1px;
+    }
+  }
+
+  .el-button {
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .el-button {
+    &--primary, &--success, &--warning, &--danger, &--info {
+      &:first-child {
+        border-right-color: rgba(#FFF, 0.5);
+      }
+
+      &:not(:first-child):not(:last-child) {
+        border-left-color: rgba(#FFF, 0.5);
+        border-right-color: rgba(#FFF, 0.5);
+      }
+
+      &:last-child {
+        border-left-color: rgba(#FFF, 0.5);
+      }
+    }
+  }
+}

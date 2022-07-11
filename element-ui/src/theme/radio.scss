@@ -1,0 +1,152 @@
+@import './common/var.scss';
+@import './mixins/utils.scss';
+
+.el-radio {
+  margin-right: 30px; // 每个el-radio之间的距离
+  line-height: 1;
+  cursor: pointer;
+  display: inline-block;
+  @include utils-user-select(none);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// 带边框
+.el-radio.is-bordered {
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid #DCDFE6;
+  box-sizing: border-box;
+
+  &.is-checked {
+    border-color: $--color-primary;
+  }
+
+  &.is-disabled {
+    border-color: #EBEEF5;
+  }
+
+  &.el-radio--medium {
+    padding: 8px 12px;
+  }
+
+  &.el-radio--small {
+    padding: 6px 10px;
+
+    .el-radio__label {
+      font-size: 12px;
+    }
+  }
+
+  &.el-radio--mini {
+    padding: 4px 10px;
+
+    .el-radio__label {
+      font-size: 12px;
+    }
+  }
+}
+
+// 禁用状态
+.el-radio.is-disabled {
+  cursor: not-allowed;
+
+  .el-radio__icon {
+    border-color: #E4E7ED;
+    background-color: #F5F7FA;
+
+    &::after {
+      background-color: #F5F7FA;
+    }
+  }
+
+  .el-radio__label {
+    color: #C0C4CC;
+  }
+
+  &.is-checked { // 禁用时候的选中状态
+    .el-radio__icon {
+      border-color: #E4E7ED;
+      background-color: #F5F7FA;
+  
+      &::after {
+        background-color: #C0C4CC;
+      }
+    }
+  
+    .el-radio__label {
+      color: #C0C4CC;
+    }
+  }
+}
+
+// 选中状态
+.el-radio.is-checked {
+  .el-radio__icon {
+    border-color: $--color-primary;
+    background-color: $--color-primary;
+
+    &::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .el-radio__label {
+    color: $--color-primary;
+  }
+}
+
+.el-radio__icon-wrapper {
+  position: relative;
+  vertical-align: middle; // 用于圆点和文字对齐
+  cursor: pointer;
+}
+
+// 左边圆点
+.el-radio__icon {
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #DCDFE6;
+  border-radius: 100%;
+  box-sizing: border-box;
+  background-color: #FFF;
+
+  &:hover {
+    border-color: $--color-primary;
+  }
+
+  // 圆点当中的小白点
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background-color: $--color-white;
+    transition: transform .15s ease-in;
+  }
+}
+
+.el-radio__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0;
+}
+
+// 右边文字
+.el-radio__label {
+  padding-left: 5px;
+  font-size: 14px;
+  color: #606266;
+}

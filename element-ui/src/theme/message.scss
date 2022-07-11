@@ -1,0 +1,106 @@
+@import './common/var.scss';
+
+@mixin message-color($color) {
+  background-color: mix(#FFF, $color, 90%);
+  border-color: mix(#FFF, $color, 80%);
+
+  .el-message__content {
+    color: $color;
+  }
+}
+
+.el-message {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  min-width: 380px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 1px solid #EBEEF5;
+  background-color: #edf2fc;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: opacity 0.3s, transform .4s, top 0.4s;
+
+  &.is-center {
+    justify-content: center;
+  }
+
+  &.is-closeable {
+    .el-message__content {
+      padding-right: 16px;
+    }
+  }
+
+  .el-message__icon {
+    margin-right: 10px;
+  }
+
+  .el-message__content {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  // 关闭按钮
+  .el-message__closeBtn {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #C0C4CC;
+    font-size: 16px;
+
+    &:hover {
+      color: #909399;
+    }
+  }
+}
+
+// 不同类型颜色
+.el-message {
+  &--info {
+    .el-message__content {
+      color: $--color-info;
+    }
+  }
+
+  &--success {
+    @include message-color($--color-success);
+  }
+
+  &--warning {
+    @include message-color($--color-warning);
+  }
+
+  &--error {
+    @include message-color($--color-danger);
+  }
+}
+
+// 不同类型下的icon颜色
+.el-message {
+  .el-icon-info {
+    color: $--color-info;
+  }
+
+  .el-icon-success {
+    color: $--color-success;
+  }
+
+  .el-icon-warning {
+    color: $--color-warning;
+  }
+
+  .el-icon-error {
+    color: $--color-danger;
+  }
+}
+
+.el-message-fade-enter,
+.el-message-fade-leave-active {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

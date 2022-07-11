@@ -1,0 +1,23 @@
+// 为了方便，统一做了样式格式化
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// icon
+@import './icon.scss';
+
+// common
+@import './common/popup';
+
+// components
+@import './button.scss';
+@import './card.scss';
+@import './carousel.scss';
+@import './checkbox.scss';
+@import './col.scss';
+@import './dialog.scss';
+@import './message.scss';
+@import './radio.scss';
+@import './row.scss';
+@import './switch.scss';

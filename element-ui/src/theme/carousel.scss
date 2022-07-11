@@ -1,0 +1,161 @@
+$--index-normal: 1 !default;
+
+.el-carousel {
+  position: relative;
+}
+
+.el-carousel__container {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+// 每个幻灯片
+.el-carousel__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: #{$--index-normal - 1};
+
+  &.is-active {
+    z-index: #{$--index-normal + 1};
+  }
+
+  &.is-animating {
+    transition: transform .4s ease-in-out;
+  }
+
+  &.el-carousel__item--card {
+    width: 50%;
+    transition: transform .4s ease-in-out;
+  }
+
+  &.is-in-stage {
+    z-index: #{$--index-normal}
+  }
+}
+
+// 指示器
+.el-carousel__indicators {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: #{$--index-normal + 1};
+
+  &--horizontal {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .el-carousel__indicator {
+      padding: 12px 4px;
+      display: inline-block;
+    }
+  }
+
+  &--vertical {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .el-carousel__indicator {
+      padding: 4px 12px;
+
+      .el-carousel__button {
+        width: 2px;
+        height: 15px;
+      }
+    }
+  }
+
+  &--outside {
+    position: static;
+    transform: none;
+    text-align: center;
+
+    .el-carousel__indicator:hover button {
+      opacity: .64;
+    }
+
+    button {
+      opacity: .24;
+      background-color: #C0C4CC;
+    }
+  }
+
+  // 指示器上每个小点
+  .el-carousel__indicator {
+    cursor: pointer;
+
+    &:hover button {
+      opacity: 0.72;
+    }
+
+    &.is-active button {
+      opacity: 1;
+    }
+  }
+}
+
+.el-carousel__button {
+  display: block;
+  opacity: 0.48;
+  width: 30px;
+  height: 2px;
+  background-color: #FFF;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: .3s;
+}
+
+// 箭头
+.el-carousel__arrow {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+  transition: .3s;
+  border-radius: 50%;
+  background-color: rgba(31, 45, 61, 0.11);
+  color: #FFF;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  text-align: center;
+  font-size: 12px;
+
+  &--left {
+    left: 16px;
+  }
+
+  &--right {
+    right: 16px;
+  }
+
+  &:hover {
+    background-color: rgba(31, 45, 61, 0.23);
+  }
+}
+
+.carousel-arrow-left-enter,
+.carousel-arrow-left-leave-active {
+  transform: translateY(-50%) translateX(-10px);
+  opacity: 0;
+}
+
+.carousel-arrow-right-enter,
+.carousel-arrow-right-leave-active {
+  transform: translateY(-50%) translateX(10px);
+  opacity: 0;
+}

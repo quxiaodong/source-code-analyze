@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      padding: 20px;
+    }
+    .el-card {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <el-card header="基础用法">
+      <el-button @click="$message('这是一条消息提示')">打开消息提示</el-button>
+      <el-button @click="openVn">VNode</el-button>
+      <el-button @click="openComponent">Component</el-button>
+    </el-card>
+
+    <el-card header="不同状态">
+      <el-button @click="$message({ message: '恭喜你，这是一条成功消息', type: 'success' })">成功</el-button>
+      <el-button @click="$message({ message: '警告哦，这是一条警告消息', type: 'warning' })">警告</el-button>
+      <el-button @click="$message('这是一条消息提示')">消息</el-button>
+      <el-button @click="$message.error('错了哦，这是一条错误消息')">错误</el-button>
+    </el-card>
+
+    <el-card header="可关闭">
+      <el-button @click="$message({ showClose: true, message: '这是一条消息提示' })">消息</el-button>
+      <el-button @click="$message({ showClose: true, message: '恭喜你，这是一条成功消息', type: 'success' })">成功</el-button>
+      <el-button @click="$message({ showClose: true, message: '警告哦，这是一条警告消息', type: 'warning' })">警告</el-button>
+      <el-button @click="$message({ showClose: true, message: '错了哦，这是一条错误消息', type: 'error' })">错误</el-button>
+    </el-card>
+
+    <el-card header="文字居中">
+      <el-button @click="$message({ message: '居中的文字', center: true })">文字居中</el-button>
+    </el-card>
+
+    <el-card header="使用 HTML 片段">
+      <el-button @click="openHTML">使用 HTML 片段</el-button>
+    </el-card>
+  </div>
+  <script>
+    Vue.component('counter', {
+      template: `
+        <el-button type="primary" style="width: 100%;" @click="handleClick">You click {{ count }} times</el-button>
+      `,
+      data() {
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        handleClick() {
+          this.count++
+        }
+      }
+    })
+
+    const app = new Vue({
+      el: '#app',
+      methods: {
+        openVn() {
+          const h = this.$createElement
+          this.$message({
+            message: h('p', null, [
+              h('span', null, '内容可以是 '),
+              h('i', { style: 'color: teal' }, 'VNode')
+            ])
+          })
+        },
+
+        openComponent() {
+          const h = this.$createElement
+          this.$message({
+            iconClass: 'none',
+            message: h('counter')
+          })
+        },
+
+        openHTML() {
+          this.$message({
+            dangerouslyUseHTMLString: true,
+            message: '<strong>这是 <i>HTML</i> 片段</strong>'
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

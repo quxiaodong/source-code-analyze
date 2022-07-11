@@ -1,0 +1,189 @@
+@import './common/var.scss';
+@import './mixins/utils.scss';
+
+.el-checkbox {
+  margin-right: 30px; // 每个el-checkbox之间的距离
+  line-height: 1;
+  cursor: pointer;
+  display: inline-block;
+  @include utils-user-select(none);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// 带边框
+.el-checkbox.is-bordered {
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid #DCDFE6;
+  box-sizing: border-box;
+
+  &.is-checked {
+    border-color: $--color-primary;
+  }
+
+  &.is-disabled {
+    border-color: #EBEEF5;
+  }
+
+  &.el-checkbox--medium {
+    padding: 8px 12px;
+  }
+
+  &.el-checkbox--small {
+    padding: 6px 10px;
+
+    .el-checkbox__label {
+      font-size: 12px;
+    }
+  }
+
+  &.el-checkbox--mini {
+    padding: 4px 10px;
+
+    .el-checkbox__label {
+      font-size: 12px;
+    }
+  }
+}
+
+// 禁用状态
+.el-checkbox.is-disabled {
+  cursor: not-allowed;
+
+  .el-checkbox__icon {
+    border-color: #E4E7ED;
+    background-color: #F5F7FA;
+
+    &::after {
+      background-color: #F5F7FA;
+    }
+  }
+
+  .el-checkbox__label {
+    color: #C0C4CC;
+  }
+
+  &.is-checked { // 禁用时候的选中状态
+    .el-checkbox__icon {
+      border-color: #E4E7ED;
+      background-color: #F5F7FA;
+  
+      &::after {
+        border-color: #C0C4CC;
+      }
+    }
+  
+    .el-checkbox__label {
+      color: #C0C4CC;
+    }
+  }
+
+  &.is-indeterminate { // 禁用时候的indeterminate状态
+    .el-checkbox__icon {
+      border-color: #E4E7ED;
+      background-color: #F5F7FA;
+
+      &::before {
+        border-color: #C0C4CC;
+        background-color: #C0C4CC;
+      }
+    }
+  }
+}
+
+// 选中状态
+.el-checkbox.is-checked {
+  .el-checkbox__icon {
+    border-color: $--color-primary;
+    background-color: $--color-primary;
+
+    &::after {
+      transform: rotate(45deg) scaleY(1);
+    }
+  }
+
+  .el-checkbox__label {
+    color: $--color-primary;
+  }
+}
+
+.el-checkbox__icon-wrapper {
+  position: relative;
+  vertical-align: middle; // 用于方块和文字对齐
+  cursor: pointer;
+}
+
+// indeterminate
+.el-checkbox.is-indeterminate {
+  .el-checkbox__icon {
+    border-color: $--color-primary;
+    background-color: $--color-primary;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      transform: scale(0.5);
+      background-color: #FFF;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+// 左边方块
+.el-checkbox__icon {
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #DCDFE6;
+  border-radius: 2px;
+  box-sizing: border-box;
+  background-color: #FFF;
+
+  &:hover {
+    border-color: $--color-primary;
+  }
+
+  // 方块当中的小对勾
+  &::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    transform: rotate(45deg) scaleY(0);
+    width: 3px;
+    height: 7px;
+    border: 1px solid #FFF;
+    border-top: 0;
+    border-left: 0;
+    transition: transform .15s ease-in .05s;
+    transform-origin: center;
+  }
+}
+
+.el-checkbox__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0;
+}
+
+// 右边文字
+.el-checkbox__label {
+  padding-left: 5px;
+  font-size: 14px;
+  color: #606266;
+}
